@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <h1 class="logo">Heart Disease Risk Predictor</h1>
+            <nav>
+                <a href="{{ url_for('home') }}">Home</a>
+                <a href="{{ url_for('predict') }}">Predict</a>
+                <a href="{{ url_for('history') }}">History</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-section">
+        <div class="container">
+            <div class="result-layout">
+
+                <!-- Main Result Summary -->
+                <div class="card result-hero-card">
+                    <div class="result-hero-top">
+                        <div>
+                            <p class="section-tag">Prediction Summary</p>
+                            <h2>Heart Disease Risk Result</h2>
+                            <p class="subtitle">
+                                This result is generated using a Logistic Regression model based on the submitted clinical data.
+                            </p>
+                        </div>
+
+                        <div class="risk-badge-large
+                            {% if risk_label == 'Low Risk' %}low
+                            {% elif risk_label == 'Medium Risk' %}medium
+                            {% else %}high{% endif %}">
+                            {{ risk_label }}
+                        </div>
+                    </div>
+
+                    <div class="result-stats">
+                        <div class="stat-box">
+                            <p class="stat-label">Predicted Probability</p>
+                            <h3>{{ probability }}%</h3>
+                        </div>
+
+                        <div class="stat-box">
+                            <p class="stat-label">Risk Category</p>
+                            <h3>{{ risk_label }}</h3>
+                        </div>
+                    </div>
+
+                    <div class="notice">
+                        <strong>Important:</strong> This result is for educational purposes only and should not be used as a medical diagnosis.
+                    </div>
+                </div>
+
+                <!-- Patient Data Sections -->
+                <div class="result-details-grid">
+
+                    <!-- Patient Info -->
+                    <div class="card detail-card">
+                        <h3>Patient Information</h3>
+                        <div class="detail-list">
+                            <div class="detail-row">
+                                <span>Age</span>
+                                <strong>{{ display_data.age }}</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Sex</span>
+                                <strong>{{ display_data.sex }}</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Chest Pain Type</span>
+                                <strong>{{ display_data.cp }}</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Clinical Measurements -->
+                    <div class="card detail-card">
+                        <h3>Clinical Measurements</h3>
+                        <div class="detail-list">
+                            <div class="detail-row">
+                                <span>Resting Blood Pressure</span>
+                                <strong>{{ display_data.trestbps }}</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Cholesterol</span>
+                                <strong>{{ display_data.chol }}</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Maximum Heart Rate Achieved</span>
+                                <strong>{{ display_data.thalach }}</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Oldpeak</span>
+                                <strong>{{ display_data.oldpeak }}</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cardiac Test Details -->
+                    <div class="card detail-card">
+                        <h3>Cardiac Test Details</h3>
+                        <div class="detail-list">
+                            <div class="detail-row">
+                                <span>Fasting Blood Sugar > 120 mg/dl</span>
+                                <strong>{{ display_data.fbs }}</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Resting ECG</span>
+                                <strong>{{ display_data.restecg }}</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Exercise Induced Angina</span>
+                                <strong>{{ display_data.exang }}</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Slope</span>
+                                <strong>{{ display_data.slope }}</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Number of Major Vessels (ca)</span>
+                                <strong>{{ display_data.ca }}</strong>
+                            </div>
+                            <div class="detail-row">
+                                <span>Thal</span>
+                                <strong>{{ display_data.thal }}</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Action buttons -->
+                <div class="card result-actions-card">
+                    <h3>What would you like to do next?</h3>
+                    <div class="form-actions">
+                        <a href="{{ url_for('predict') }}" class="btn primary-btn">Try Another Prediction</a>
+                        <a href="{{ url_for('history') }}" class="btn secondary-btn">View History</a>
+                        <a href="{{ url_for('home') }}" class="btn secondary-btn">Back Home</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+</body>
+</html>
+``

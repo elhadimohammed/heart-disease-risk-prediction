@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediction History</title>
+    {{ url_for('static', filename='css/style.css') }}
+</head>
+<body>
+    <header class="navbar">
+        <div class="container nav-content">
+            <h1 class="logo">Heart Disease Risk Predictor</h1>
+            <nav>
+                {{ url_for('home') }}Home</a>
+                {{ url_for('predict') }}Predict</a>
+                {{ url_for('history') }}History</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page-section">
+        <div class="container">
+            <div class="card">
+                <h2>Prediction History</h2>
+                <p class="subtitle">All saved prediction records from SQL Server.</p>
+
+                {% if rows %}
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Age</th>
+                                <th>Sex</th>
+                                <th>Chest Pain Type</th>
+                                <th>Resting BP</th>
+                                <th>Cholesterol</th>
+                                <th>FBS > 120</th>
+                                <th>Resting ECG</th>
+                                <th>Max Heart Rate</th>
+                                <th>Exercise Angina</th>
+                                <th>Oldpeak</th>
+                                <th>Slope</th>
+                                <th>Major Vessels</th>
+                                <th>Thal</th>
+                                <th>Probability</th>
+                                <th>Result</th>
+                                <th>Created At</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for row in rows %}
+                            <tr>
+                                <td>{{ row.prediction_id }}</td>
+                                <td>{{ row.age }}</td>
+                                <td>{{ row.sex }}</td>
+                                <td>{{ row.cp }}</td>
+                                <td>{{ row.trestbps }}</td>
+                                <td>{{ row.chol }}</td>
+                                <td>{{ row.fbs }}</td>
+                                <td>{{ row.restecg }}</td>
+                                <td>{{ row.thalach }}</td>
+                                <td>{{ row.exang }}</td>
+                                <td>{{ row.oldpeak }}</td>
+                                <td>{{ row.slope }}</td>
+                                <td>{{ row.ca }}</td>
+                                <td>{{ row.thal }}</td>
+                                <td>{{ row.predicted_probability }}%</td>
+                                <td>{{ row.prediction_result }}</td>
+                                <td>{{ row.created_at }}</td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="empty-state">
+                    <p>No prediction history found yet.</p>
+                    {{ url_for('predict') }}Make First Prediction</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </main>
+</body>
+</html>
