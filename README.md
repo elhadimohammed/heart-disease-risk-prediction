@@ -1,5 +1,4 @@
 # heart-disease-risk-prediction
-# Heart Disease Risk Predictor
 
 A web-based **Heart Disease Risk Prediction System** built using **Python (Flask)** for the backend, **HTML/CSS/JavaScript** for the frontend, **SQL Server** for database storage, and **Logistic Regression** from **scikit-learn** for machine learning.
 
